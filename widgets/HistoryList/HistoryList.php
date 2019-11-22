@@ -2,7 +2,7 @@
 
 namespace app\widgets\HistoryList;
 
-use app\models\search\HistorySearch;
+use app\models\history\Search as HistorySearch;
 use app\widgets\Export\Export;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;

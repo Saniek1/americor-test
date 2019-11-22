@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\history\HistoryEventsInterface;
 use common\models\interfaces\CallInterface;
 use Yii;
 
@@ -222,4 +223,6 @@ class Call extends \yii\db\ActiveRecord
         }
         return '00:00';
     }
+
+
 }

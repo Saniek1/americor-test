@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\search\HistorySearch;
+use app\models\history\Search as HistorySearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;

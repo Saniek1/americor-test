@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\history\HistoryEventsInterface;
 use Yii;
 
 /**
@@ -189,4 +190,5 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->status == self::STATUS_DONE;
     }
+
 }

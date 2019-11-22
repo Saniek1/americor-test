@@ -7,10 +7,8 @@
  * @var $exportType string
  */
 
-use app\models\History;
-use app\models\Task;
+use app\models\history\History;
 use app\widgets\Export\Export;
-use app\widgets\HistoryList\helpers\HistoryListHelper;
 
 $filename = 'history';
 $filename .= '-' . time();
@@ -48,7 +46,9 @@ ini_set('memory_limit', '2048M');
         [
             'label' => Yii::t('app', 'Message'),
             'value' => function (History $model) {
-                return strip_tags(HistoryListHelper::getBodyByModel($model));
+                $event = \app\models\history\events\EventsFactory::factory($model);
+
+                return strip_tags($event->getBody($model));
             }
         ]
     ],

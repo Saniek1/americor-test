@@ -30,7 +30,7 @@ class m191111_090949_init extends Migration
         $this->createTable('{{%customer}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
-            'status' => $this->integer()->notNull(),
+            'status' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
 
 

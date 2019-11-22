@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\history\HistoryEventsInterface;
 use Yii;
 
 /**
@@ -179,4 +180,6 @@ class Sms extends \yii\db\ActiveRecord
     {
         return self::getDirectionTextByValue($this->direction);
     }
+
+
 }

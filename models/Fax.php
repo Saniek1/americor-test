@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\history\HistoryEventsInterface;
 use Yii;
 
 /**
@@ -121,5 +122,6 @@ class Fax extends \yii\db\ActiveRecord
     {
         return self::getTypeTexts()[$this->type] ?? $this->type;
     }
+
 
 }

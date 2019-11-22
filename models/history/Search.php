@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models\search;
+namespace app\models\history;
 
-use app\models\History;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -11,7 +10,7 @@ use yii\data\ActiveDataProvider;
  *
  * @property array $objects
  */
-class HistorySearch extends History
+class Search extends History
 {
     /**
      * @inheritdoc
