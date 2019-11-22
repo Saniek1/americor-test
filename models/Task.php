@@ -1,8 +1,7 @@
 <?php
 
 namespace app\models;
-
-use app\models\history\HistoryEventsInterface;
+s
 use Yii;
 
 /**
@@ -72,9 +71,9 @@ class Task extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['is_follow', 'is_closed'], 'boolean'],
             [['title', 'object'], 'string', 'max' => 255],
-            [['ins_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['ins_user_id' => 'id']],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['ins_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['ins_user_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::class, 'targetAttribute' => ['customer_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -106,7 +105,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getInsUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'ins_user_id']);
+        return $this->hasOne(User::class, ['id' => 'ins_user_id']);
     }
 
     /**
@@ -114,7 +113,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Customer::class, ['id' => 'customer_id']);
     }
 
     /**
@@ -122,7 +121,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**

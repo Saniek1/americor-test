@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use app\models\history\HistoryEventsInterface;
-use common\models\interfaces\CallInterface;
 use Yii;
 
 /**
@@ -89,8 +87,8 @@ class Call extends \yii\db\ActiveRecord
             [['comment', 'info', 'records', 'extension_type', 'extension'], 'string'],
             [['switchvox_job_id', 'phone_from', 'phone_to', 'outcome'], 'string', 'max' => 255],
             [['is_warning'], 'boolean'],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::class, 'targetAttribute' => ['customer_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             //[['outcome'], 'required', 'on' => self::SCENARIO_DISPOSITION]
         ];
     }
@@ -130,7 +128,7 @@ class Call extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Customer::class, ['id' => 'customer_id']);
     }
 
     /**
@@ -138,7 +136,7 @@ class Call extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     /**
