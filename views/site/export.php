@@ -40,7 +40,8 @@ ini_set('memory_limit', '2048M');
         [
             'label' => Yii::t('app', 'Event'),
             'value' => function (History $model) {
-                return $model->eventText;
+                $event = \app\models\history\events\EventsFactory::factory($model);
+                return $event->eventText;
             }
         ],
         [

@@ -32,7 +32,7 @@ class Type implements EventsInterface
     public function getBody($model) : string
     {
          return
-             "$model->eventText " .
+             "$this->eventText " .
              "<span class='tag'>" .
              (Customer::getTypeTextByType($model->getDetailOldValue('type')) ?? "<i>not set</i>") .
              "</span>" .
@@ -40,5 +40,10 @@ class Type implements EventsInterface
              "<span class='tag'>" .
              (Customer::getTypeTextByType($model->getDetailNewValue('type')) ?? "<i>not set</i>") .
              "</span>";
+    }
+
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Type changed');
     }
 }

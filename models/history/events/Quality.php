@@ -34,7 +34,7 @@ class Quality implements EventsInterface
     public function getBody($model) : string
     {
          return
-             "$model->eventText " .
+             "$this->eventText " .
              "<span class='tag'>" .
              (Customer::getQualityTextByQuality($model->getDetailOldValue('quality'))) .
              "</span>" .
@@ -42,5 +42,11 @@ class Quality implements EventsInterface
              "<span class='tag'>" .
              (Customer::getQualityTextByQuality($model->getDetailNewValue('quality'))) .
              "</span>";
+    }
+
+
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Property changed');
     }
 }

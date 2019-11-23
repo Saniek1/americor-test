@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models\history\events;
+namespace app\models\history\events\fax;
 
+use app\models\history\events\EventsInterface;
 use Yii;
 
 /**
@@ -30,7 +31,7 @@ use Yii;
  *
  * @property User $user
  */
-class Fax extends \app\models\Fax implements EventsInterface
+class IncomingFax extends \app\models\Fax implements EventsInterface
 {
     public function renderFileName() : string
     {
@@ -62,8 +63,12 @@ class Fax extends \app\models\Fax implements EventsInterface
 
     public function getBody($model) : string
     {
-        return $model->eventText;
+        return $this->eventText;
     }
 
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Incoming fax');
+    }
 
 }

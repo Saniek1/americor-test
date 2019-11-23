@@ -1,7 +1,9 @@
 <?php
 
-namespace app\models\history\events;
+namespace app\models\history\events\sms;
 
+use app\models\history\events\EventsInterface;
+use app\models\Sms;
 use Yii;
 
 /**
@@ -11,7 +13,7 @@ use Yii;
  * @property Customer $customer
  * @property User $user
  */
-class Sms extends \app\models\Sms implements EventsInterface
+class IncomingSms extends \app\models\Sms implements EventsInterface
 {
 
     public function renderFileName() : string
@@ -41,5 +43,9 @@ class Sms extends \app\models\Sms implements EventsInterface
         return $this->message ?? '';
     }
 
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Incoming message');
+    }
 
 }

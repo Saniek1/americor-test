@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models\history\events;
+namespace app\models\history\events\call;
 
+use app\models\history\events\EventsInterface;
 use Yii;
 
 /**
@@ -11,7 +12,7 @@ use Yii;
  * @property Customer $customer
  * @property User $user
  */
-class Call extends \app\models\Call implements EventsInterface
+class IncomingCall extends \app\models\Call implements EventsInterface
 {
 
     public function renderFileName() : string
@@ -41,6 +42,11 @@ class Call extends \app\models\Call implements EventsInterface
                     " <span class='text-grey'>" . $this->getTotalDisposition(false) . "</span>" : ""
                 ) : '<i>Deleted</i> '
         );
+    }
+
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Incoming call');
     }
 
 }

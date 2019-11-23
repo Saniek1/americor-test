@@ -14,4 +14,5 @@ interface EventsInterface
     public function renderFileName() : string;
     public function renderParams(History $model) : array;
     public function getBody(History $model) : string;
+    public function getEventText() : string;
 }

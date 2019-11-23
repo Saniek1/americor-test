@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models\history\events;
+namespace app\models\history\events\task;
 
-use app\models\history\HistoryEventsInterface;
+use app\models\history\events\EventsInterface;
 use Yii;
 
 /**
@@ -12,7 +12,7 @@ use Yii;
  * @property string $isInbox
  * @property string $statusText
  */
-class Task extends \app\models\Task implements EventsInterface
+class CreatedTask extends \app\models\Task implements EventsInterface
 {
 
 
@@ -34,6 +34,11 @@ class Task extends \app\models\Task implements EventsInterface
 
     public function getBody($model) : string
     {
-         return "$model->eventText: " . ($this->title ?? '');
+         return "$this->eventText: " . ($this->title ?? '');
+    }
+
+    public function getEventText() : string
+    {
+        return Yii::t('app', 'Task createde');
     }
 }
