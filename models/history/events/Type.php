@@ -3,6 +3,7 @@
 namespace app\models\history\events;
 
 use app\models\Customer;
+use app\models\history\History;
 use Yii;
 
 /**
@@ -16,10 +17,10 @@ class Type implements EventsInterface
 
     public function renderFileName() : string
     {
-        return '_item_common';
+        return 'type/type';
     }
 
-    public function renderParams($model) : array
+    public function renderParams(History $model) : array
     {
         return [
             'user' => $model->user,
@@ -29,16 +30,16 @@ class Type implements EventsInterface
         ];
     }
 
-    public function getBody($model) : string
+    public function getBody(History $model) : string
     {
          return
-             "$this->eventText " .
+             $this->eventText .
              "<span class='tag'>" .
-             (Customer::getTypeTextByType($model->getDetailOldValue('type')) ?? "<i>not set</i>") .
+                (Customer::getTypeTextByType($model->getDetailOldValue('type')) ?? "<i>not set</i>") .
              "</span>" .
              "<span class='arrow'></span>" .
              "<span class='tag'>" .
-             (Customer::getTypeTextByType($model->getDetailNewValue('type')) ?? "<i>not set</i>") .
+                (Customer::getTypeTextByType($model->getDetailNewValue('type')) ?? "<i>not set</i>") .
              "</span>";
     }
 

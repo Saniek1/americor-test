@@ -78,7 +78,6 @@ class SiteController extends Controller
         return $this->render('export', [
             'dataProvider' => $model->search(\Yii::$app->request->queryParams),
             'exportType' => $exportType,
-            'model' => $model
         ]);
     }
 

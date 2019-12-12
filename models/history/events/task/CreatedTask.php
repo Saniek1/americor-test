@@ -3,6 +3,7 @@
 namespace app\models\history\events\task;
 
 use app\models\history\events\EventsInterface;
+use app\models\history\History;
 use Yii;
 
 /**
@@ -15,13 +16,12 @@ use Yii;
 class CreatedTask extends \app\models\Task implements EventsInterface
 {
 
-
     public function renderFileName() : string
     {
-        return '_item_common';
+        return 'task/task';
     }
 
-    public function renderParams($model) : array
+    public function renderParams(History $model) : array
     {
         return [
             'user' => $model->user,
@@ -32,7 +32,7 @@ class CreatedTask extends \app\models\Task implements EventsInterface
         ];
     }
 
-    public function getBody($model) : string
+    public function getBody(History $model) : string
     {
          return "$this->eventText: " . ($this->title ?? '');
     }

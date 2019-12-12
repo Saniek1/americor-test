@@ -8,8 +8,6 @@ use app\widgets\HistoryList\helpers\HistoryListHelper;
 
 /** @var $model \app\models\search\HistorySearch */
 
-$event = \app\models\history\events\EventsFactory::factory($model);
-
-echo $this->render($event->renderFileName(), $event->renderParams($model));
+echo $this->render($model->eventFactory->renderFileName(), $model->eventFactory->renderParams($model));
 
  ?>

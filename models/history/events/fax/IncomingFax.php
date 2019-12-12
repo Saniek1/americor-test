@@ -3,6 +3,7 @@
 namespace app\models\history\events\fax;
 
 use app\models\history\events\EventsInterface;
+use app\models\history\History;
 use Yii;
 
 /**
@@ -33,25 +34,17 @@ use Yii;
  */
 class IncomingFax extends \app\models\Fax implements EventsInterface
 {
+
     public function renderFileName() : string
     {
-        return '_item_common';
+        return 'fax/fax';
     }
 
-    public function renderParams($model) : array
+    public function renderParams(History $model) : array
     {
         return [
             'user' => $model->user,
             'body' => $this->getBody($model),
-                ' - ' .
-                (isset($this->document) ? \yii\helpers\Html::a(
-                    Yii::t('app', 'view document'),
-                    $this->document->getViewUrl(),
-                    [
-                        'target' => '_blank',
-                        'data-pjax' => 0
-                    ]
-                ) : ''),
             'footer' => Yii::t('app', '{type} was sent to {group}', [
                 'type' => $this->getTypeText() ?? 'Fax',
                 'group' => isset($this->creditorGroup) ? \yii\helpers\Html::a($this->creditorGroup->name, ['creditors/groups'], ['data-pjax' => 0]) : ''
@@ -61,9 +54,20 @@ class IncomingFax extends \app\models\Fax implements EventsInterface
         ];
     }
 
-    public function getBody($model) : string
+    public function getBody(History $model) : string
     {
-        return $this->eventText;
+        $dop = '';
+        if (isset($this->document)) {
+            $dop = \yii\helpers\Html::a(
+                Yii::t('app', 'view document'),
+                $this->document->getViewUrl(),
+                [
+                    'target' => '_blank',
+                    'data-pjax' => 0
+                ]
+            );
+        }
+        return $this->eventText . ' - ' . $dop;
     }
 
     public function getEventText() : string

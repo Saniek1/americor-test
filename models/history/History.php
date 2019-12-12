@@ -3,8 +3,19 @@
 namespace app\models\history;
 
 use app\models\Customer;
+use app\models\history\events\Quality;
+use app\models\history\events\Type;
 use app\models\traits\ObjectNameTrait;
 use app\models\User;
+use app\models\history\events\call\IncomingCall;
+use app\models\history\events\call\OutgoingCall;
+use app\models\history\events\fax\IncomingFax;
+use app\models\history\events\fax\OutgoingFax;
+use app\models\history\events\sms\IncomingSms;
+use app\models\history\events\sms\OutgoingSms;
+use app\models\history\events\task\CompletedTask;
+use app\models\history\events\task\CreatedTask;
+use app\models\history\events\task\UpdatedTask;
 use Yii;
 
 /**
@@ -144,4 +155,45 @@ class History extends \yii\db\ActiveRecord
         $detail = json_decode($this->detail);
         return isset($detail->data->{$attribute}) ? $detail->data->{$attribute} : null;
     }
+
+    public function getEventFactory()
+    {
+        switch ($this->event) {
+            case History::EVENT_CREATED_TASK:
+                return new CreatedTask($this->task);
+                break;
+            case History::EVENT_COMPLETED_TASK:
+                return new CompletedTask($this->task);
+                break;
+            case History::EVENT_UPDATED_TASK:
+                return new UpdatedTask($this->task);
+                break;
+            case History::EVENT_INCOMING_SMS:
+                return new IncomingSms($this->sms);
+                break;
+            case History::EVENT_OUTGOING_SMS:
+                return new OutgoingSms($this->sms);
+                break;
+            case History::EVENT_OUTGOING_FAX:
+                return new OutgoingFax($this->fax);
+                break;
+            case History::EVENT_INCOMING_FAX:
+                return new IncomingFax($this->fax);
+                break;
+            case History::EVENT_CUSTOMER_CHANGE_TYPE:
+                return new Type();
+                break;
+            case History::EVENT_CUSTOMER_CHANGE_QUALITY:
+                return new Quality();
+                break;
+
+            case History::EVENT_INCOMING_CALL:
+                return new IncomingCall($this->call);
+                break;
+            case History::EVENT_OUTGOING_CALL:
+                return new OutgoingCall($this->call);
+                break;
+        }
+    }
+
 }

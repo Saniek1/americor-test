@@ -3,6 +3,7 @@
 namespace app\models\history\events\call;
 
 use app\models\history\events\EventsInterface;
+use app\models\history\History;
 use Yii;
 
 /**
@@ -17,10 +18,10 @@ class IncomingCall extends \app\models\Call implements EventsInterface
 
     public function renderFileName() : string
     {
-        return '_item_common';
+        return 'call/call';
     }
 
-    public function renderParams($model) : array
+    public function renderParams(History $model) : array
     {
         return [
             'user' => $model->user,
@@ -33,7 +34,7 @@ class IncomingCall extends \app\models\Call implements EventsInterface
         ];
     }
 
-    public function getBody($model) : string
+    public function getBody(History $model) : string
     {
         return (
             $this->totalStatusText ?

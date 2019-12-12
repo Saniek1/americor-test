@@ -1,12 +1,4 @@
 <?php
-
-/**
- * @var $this yii\web\View
- * @var $model \app\models\History
- * @var $dataProvider yii\data\ActiveDataProvider
- * @var $exportType string
- */
-
 use app\models\history\History;
 use app\widgets\Export\Export;
 
@@ -40,16 +32,13 @@ ini_set('memory_limit', '2048M');
         [
             'label' => Yii::t('app', 'Event'),
             'value' => function (History $model) {
-                $event = \app\models\history\events\EventsFactory::factory($model);
-                return $event->eventText;
+                return $model->eventFactory->eventText;
             }
         ],
         [
             'label' => Yii::t('app', 'Message'),
             'value' => function (History $model) {
-                $event = \app\models\history\events\EventsFactory::factory($model);
-
-                return strip_tags($event->getBody($model));
+                return strip_tags($model->eventFactory->getBody($model));
             }
         ]
     ],

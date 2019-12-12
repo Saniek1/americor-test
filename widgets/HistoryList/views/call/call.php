@@ -8,14 +8,11 @@ use yii\helpers\Html;
 /* @var $bodyDatetime string */
 /* @var $iconClass string */
 ?>
-<?php if (isset($iconIncome) && $iconIncome) : ?>
-    <div class="icon-group position-relative pull-xs-left">
-        <?php echo Html::tag('i', '', ['class' => "icon icon-circle icon-main white $iconClass"]); ?>
-        <span class="tag tag-pill tag-danger up"><i class="icon md-long-arrow-down" aria-hidden="true"></i></span>
-    </div>
-<?php else: ?>
+<div class="icon-group position-relative pull-xs-left">
     <?php echo Html::tag('i', '', ['class' => "icon icon-circle icon-main white $iconClass"]); ?>
-<?php endif; ?>
+    <span class="tag tag-pill tag-danger up"><i class="icon md-long-arrow-down" aria-hidden="true"></i></span>
+</div>
+
 
 <div class="list-group-content">
 
@@ -24,19 +21,11 @@ use yii\helpers\Html;
 
             <div class="list-group-message">
                 <?php echo $body ?>
-                <?php if (isset($bodyDatetime)) : ?>
-                    <span class="list-group-datetime">
-                        <?= \app\widgets\DateTime\DateTime::widget(['dateTime' => $bodyDatetime]) ?>
-                    </span>
-                <?php endif; ?>
             </div>
 
-            <?php if (isset($user)): ?>
-                <div class="list-group-side">
-                    <?= $user->username; ?>
-                </div>
-            <?php endif; ?>
-
+            <div class="list-group-side">
+                <?= $user->username; ?>
+            </div>
         </div>
     </div>
 
